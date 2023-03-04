@@ -102,4 +102,5 @@ end
 
 group :test, :development do
   gem "fuubar"
+  gem 'rspec'
 end

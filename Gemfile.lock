@@ -390,6 +390,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.2)
   rails_safe_tasks
   rb-readline
+  rspec
   rspec-rails
   rubocop
   selenium-webdriver
