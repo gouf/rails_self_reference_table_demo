@@ -3,4 +3,6 @@ class Category < ApplicationRecord
     foreign_key: 'parent_id'
 
   belongs_to :parent, class_name: 'Category', optional: true
+
+  scope :root_categories, -> { where(parent_id: nil) }
 end
