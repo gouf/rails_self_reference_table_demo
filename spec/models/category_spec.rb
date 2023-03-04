@@ -80,4 +80,50 @@ describe Category do
       end
     end
   end
+
+  describe '#to_group' do
+    context '#grouped_options_for_select に渡せる Hash に変換したい場合' do
+      before do
+        parent1 = Category.create(name: 'parent1')
+        Category.create(name: 'child1_1', parent_id: parent1.id)
+        Category.create(name: 'child1_2', parent_id: parent1.id)
+        Category.create(name: 'child1_3', parent_id: parent1.id)
+
+        parent2 = Category.create(name: 'parent2')
+        Category.create(name: 'child2_1', parent_id: parent2.id)
+        Category.create(name: 'child2_2', parent_id: parent2.id)
+        Category.create(name: 'child2_3', parent_id: parent2.id)
+
+        parent3 = Category.create(name: 'parent3')
+        Category.create(name: 'child3_1', parent_id: parent3.id)
+        Category.create(name: 'child3_2', parent_id: parent3.id)
+        Category.create(name: 'child3_3', parent_id: parent3.id)
+      end
+
+      let(:expected) do
+        {
+          'parent1': [
+            'child1_1',
+            'child1_2',
+            'child1_3'
+          ],
+          'parent2': [
+            'child2_1',
+            'child2_2',
+            'child2_3'
+          ],
+          'parent3': [
+            'child3_1',
+            'child3_2',
+            'child3_3'
+          ]
+        }
+      end
+
+      # Ref: #grouped_options_for_select https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-grouped_options_for_select
+      it 'Category データが Hash 形式に変換される' do
+        expect(Category.to_group).to eq expected
+      end
+    end
+  end
 end
